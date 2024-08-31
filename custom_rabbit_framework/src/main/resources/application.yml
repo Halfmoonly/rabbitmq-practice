@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: custom_rabbit_framework
+  #-----------------------------------------------------------------
+  ##                       RabbitMQ 配置                        --
+  #-----------------------------------------------------------------
+  # rabbitmq:
+  #   #    addresses: ${RABBIT1:10.0.36.124}:5672,${RABBIT2:10.0.36.125}:5672,${RABBIT3:10.0.36.126}:5672
+  #   addresses: ${RABBIT1:10.0.36.124}:5672
+  #   username: ${RABBIT_MQ_USERNAME:mes}
+  #   password: ${RABBIT_MQ_PASSWORD:Changeme_123}
+  ## rabbitmq集群配置
+#  rabbitmq:
+#    addresses: ${RABBIT1:10.28.20.10}:31401,${RABBIT2:10.28.20.18}:31401,${RABBIT3:10.28.20.24}:31401
+#    username: ${RABBIT_MQ_USERNAME:MY_USER}
+#    password: ${RABBIT_MQ_PASSWORD:Changeme_123}
+#    publisher-confirms: true
+#    publisher-confirm-type: correlated
+#    publisher-returns: true
+  rabbitmq:
+    addresses: ${RABBIT1:192.168.18.100}:5672
+    username: ${RABBIT_MQ_USERNAME:guest}
+    password: ${RABBIT_MQ_PASSWORD:123456}
+    publisher-confirms: true
+    publisher-confirm-type: correlated
+    publisher-returns: true

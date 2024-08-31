@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  rabbitmq:
+    host: 192.168.18.100
+    port: 5672
+    username: guest
+    password: 123456
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual # 把消息确认模式改为手动确认
+        prefetch: 1 # 每次从队列中取回消息的数量，消费端限流
