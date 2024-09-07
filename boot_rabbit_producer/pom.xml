@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.lyflexi</groupId>
-        <artifactId>debug_rabbitmq</artifactId>
+        <artifactId>rabbitmq-practice</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>org.lyflexi</groupId>

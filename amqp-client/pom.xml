@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.lyflexi</groupId>
-        <artifactId>debug_rabbitmq</artifactId>
+        <artifactId>rabbitmq-practice</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
