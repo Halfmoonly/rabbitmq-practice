@@ -2,7 +2,8 @@ package org.lyflexi.custom_rabbit_framework.biz.handler;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import org.lyflexi.custom_rabbit_framework.commonapi.message.DemoMessageData;
+import org.lyflexi.custom_rabbit_framework.commonapi.handler.AbstractHandler;
+import org.lyflexi.custom_rabbit_framework.biz.message.DemoMessageData;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,9 +14,17 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class DemoMessageHandler {
-    public void handleMessage (DemoMessageData message) {
-        log.info("开始处理asyncRabbitEventPublisher消息：{}", JSON.toJSONString(message));
+public class DemoMessageHandler extends AbstractHandler<DemoMessageData> {
+
+
+    @Override
+    public String getHandlerName() {
+        return "DemoMessageHandler";
+    }
+
+    @Override
+    public void doHandle(DemoMessageData messageData) {
+        log.info("消息处理器：{}，开始处理消息：{}", this.getHandlerName(),JSON.toJSONString(messageData));
     }
 }
 

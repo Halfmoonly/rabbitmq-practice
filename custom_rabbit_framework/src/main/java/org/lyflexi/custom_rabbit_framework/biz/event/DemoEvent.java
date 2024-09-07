@@ -2,7 +2,7 @@ package org.lyflexi.custom_rabbit_framework.biz.event;
 
 import org.lyflexi.custom_rabbit_framework.commonapi.enums.EventTypeEnums;
 import org.lyflexi.custom_rabbit_framework.commonapi.event.AbstractEvent;
-import org.lyflexi.custom_rabbit_framework.commonapi.message.DemoMessageData;
+import org.lyflexi.custom_rabbit_framework.biz.message.DemoMessageData;
 import org.lyflexi.custom_rabbit_framework.commonapi.message.IMessageData;
 
 /**

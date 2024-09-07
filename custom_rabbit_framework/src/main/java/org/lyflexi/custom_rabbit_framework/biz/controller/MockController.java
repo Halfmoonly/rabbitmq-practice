@@ -3,16 +3,11 @@ package org.lyflexi.custom_rabbit_framework.biz.controller;
 import cn.hutool.core.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.lyflexi.custom_rabbit_framework.biz.event.DemoEvent;
-import org.lyflexi.custom_rabbit_framework.commonapi.message.DemoMessageData;
+import org.lyflexi.custom_rabbit_framework.biz.message.DemoMessageData;
 import org.lyflexi.custom_rabbit_framework.commonapi.publisher.IEventPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Description:
@@ -60,7 +55,26 @@ public class MockController {
         message.setSeqNo(RandomUtil.randomNumbers(10));
         message.setVersion(RandomUtil.randomLong());
         message.setFactoryCode("SZ54");
-        asyncRabbitEventPublisher.publish(DemoEvent.of(message));
+        rabbitEventPublisher.publish(DemoEvent.of(message));
         log.info("rabbitEventPublisher测试结束");
+    }
+
+    /**
+     * Spring事件发布发送
+     */
+    @Autowired
+    @Qualifier("springEventPublisher")
+    private IEventPublisher springEventPublisher;
+    @GetMapping(value = "/springEventPublisher")
+    public void springEventPublisher (@RequestParam String name) {
+        log.info("springEventPublisher测试开始");
+        DemoMessageData message = new DemoMessageData();
+        message.setId(RandomUtil.randomNumbers(10));
+        message.setName("springEventPublisher");
+        message.setSeqNo(RandomUtil.randomNumbers(10));
+        message.setVersion(RandomUtil.randomLong());
+        message.setFactoryCode("SZ54");
+        springEventPublisher.publish(DemoEvent.of(message));
+        log.info("springEventPublisher测试结束");
     }
 }

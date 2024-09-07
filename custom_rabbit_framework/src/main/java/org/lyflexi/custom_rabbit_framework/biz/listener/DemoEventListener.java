@@ -7,7 +7,7 @@ import org.lyflexi.custom_rabbit_framework.biz.event.DemoEvent;
 import org.lyflexi.custom_rabbit_framework.biz.handler.DemoMessageHandler;
 import org.lyflexi.custom_rabbit_framework.commonapi.constant.MQIConstant;
 import org.lyflexi.custom_rabbit_framework.commonapi.listener.IListener;
-import org.lyflexi.custom_rabbit_framework.commonapi.message.DemoMessageData;
+import org.lyflexi.custom_rabbit_framework.biz.message.DemoMessageData;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class DemoEventListener implements IListener {
      */
     @RabbitListener(queues = MQIConstant.TASK_SUBMITTED_QUEUE, concurrency = "1")
     public void onRabbitMQEvent(DemoMessageData message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
-        demoMessageHandler.handleMessage(message);
+        demoMessageHandler.process(message);
     }
 
     /**
@@ -49,6 +49,6 @@ public class DemoEventListener implements IListener {
     @EventListener
     public void onSpringEvent(DemoEvent event) {
         log.info("[Demo-Listener]接收到事件：{}", JSON.toJSONString(event));
-        demoMessageHandler.handleMessage(event.getMessageData());
+        demoMessageHandler.process(event.getMessageData());
     }
 }

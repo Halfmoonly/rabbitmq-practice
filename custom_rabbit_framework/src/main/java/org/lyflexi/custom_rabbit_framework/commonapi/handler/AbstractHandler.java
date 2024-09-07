@@ -1,4 +1,4 @@
-package org.lyflexi.custom_rabbit_framework.biz.handler;
+package org.lyflexi.custom_rabbit_framework.commonapi.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.lyflexi.custom_rabbit_framework.commonapi.message.BaseMessageData;
