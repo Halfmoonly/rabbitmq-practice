@@ -111,12 +111,12 @@ public class DemoEventListener implements IListener {
 我们希望在项目启动的时候初始化所有的Exchange|Queue|Bind，而不是手动在management-ui上手动创建
 
 有以下两种方式：
-### 基于枚举类，手动注册Exchange|Queue|Bind
+### 方式一：基于枚举类，手动注册Exchange|Queue|Bind
 枚举类：[EventTypeEnums.java](custom_rabbit_framework%2Fsrc%2Fmain%2Fjava%2Forg%2Flyflexi%2Fcustom_rabbit_framework%2Fcommonapi%2Fenums%2FEventTypeEnums.java)
 ```java
 DEMO_EVENT("demo_event", "MES_PASS_STATION_TOPIC", "TASK_SUBMITTED_QUEUE2", "LES_DEFAULT_ROUTING:TASK_SUBMITTED_QUEUE2", "LES_DEFAULT_TOPIC_EXCHANGE"),
 ```
-方式一：配置类：[RabbitMQConfig.java](custom_rabbit_framework%2Fsrc%2Fmain%2Fjava%2Forg%2Flyflexi%2Fcustom_rabbit_framework%2Fcommonapi%2Fconfig%2FRabbitMQConfig.java)
+配置类：[RabbitMQConfig.java](custom_rabbit_framework%2Fsrc%2Fmain%2Fjava%2Forg%2Flyflexi%2Fcustom_rabbit_framework%2Fcommonapi%2Fconfig%2FRabbitMQConfig.java)
 ```java
 
 @Configuration
@@ -157,7 +157,7 @@ public class RabbitMQConfig {
 }
 ```
 
-### 基于枚举类，更简洁的Exchange|Queue|Bind初始化方式
+### 方式二：基于枚举类，更简洁的Exchange|Queue|Bind初始化方式
 
 枚举类：[EventTypeEnums.java](custom_rabbit_framework%2Fsrc%2Fmain%2Fjava%2Forg%2Flyflexi%2Fcustom_rabbit_framework%2Fcommonapi%2Fenums%2FEventTypeEnums.java)
 ```java
