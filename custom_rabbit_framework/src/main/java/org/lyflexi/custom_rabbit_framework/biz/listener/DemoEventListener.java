@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.lyflexi.custom_rabbit_framework.biz.event.DemoEvent;
 import org.lyflexi.custom_rabbit_framework.biz.handler.DemoMessageHandler;
 import org.lyflexi.custom_rabbit_framework.commonapi.constant.MQIConstant;
+import org.lyflexi.custom_rabbit_framework.commonapi.holder.SystemTaskerContextHolder;
 import org.lyflexi.custom_rabbit_framework.commonapi.listener.IListener;
 import org.lyflexi.custom_rabbit_framework.biz.message.DemoMessageData;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -38,6 +39,8 @@ public class DemoEventListener implements IListener {
      */
     @RabbitListener(queues = MQIConstant.TASK_SUBMITTED_QUEUE, concurrency = "1")
     public void onRabbitMQEvent(DemoMessageData message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
+        //由于消息是异步的，切记一定要设置系统上下文，后续BizContextHolder将填充为admin信息
+        SystemTaskerContextHolder.getInstance().mount();
         demoMessageHandler.process(message);
     }
 
