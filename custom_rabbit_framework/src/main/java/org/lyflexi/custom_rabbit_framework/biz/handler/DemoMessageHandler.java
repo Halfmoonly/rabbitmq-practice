@@ -2,8 +2,8 @@ package org.lyflexi.custom_rabbit_framework.biz.handler;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import org.lyflexi.custom_rabbit_framework.commonapi.handler.AbstractHandler;
 import org.lyflexi.custom_rabbit_framework.biz.message.DemoMessageData;
+import org.lyflexi.custom_rabbit_framework.commonapi.handler.AbstractHandler;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class DemoMessageHandler extends AbstractHandler<DemoMessageData> {
-
 
     @Override
     public String getHandlerName() {
