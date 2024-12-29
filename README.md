@@ -1,7 +1,7 @@
 # rabbitmq-practice
 # custom_rabbit_framework
 
-## 如何使用该框架进行事件发布与消费
+## 1.如何使用该框架进行事件发布与消费
 
 ### 如何发布事件：见MockController
 - 发送异步rabbitmq消息 
@@ -107,7 +107,7 @@ public class DemoEventListener implements IListener {
 ```
 
 
-## 如何自动注册rabbitmq的关键配置信息
+## 2. 如何自动注册rabbitmq的关键配置信息
 我们希望在项目启动的时候初始化所有的Exchange|Queue|Bind，而不是手动在management-ui上手动创建
 
 有以下两种方式：
@@ -218,4 +218,41 @@ public class AutoLoadQueuePostprocessor implements BeanFactoryPostProcessor {
     }
 }
 
+```
+
+## 3. 服务集群场景下的广播模式实践
+为什么要用广播模式，生产上线之后服务往往会做成集群，即同服务的工作负载会有多份以此来保证高可用性。如果是单播，当接收到消息的服务坏点时，其他正常的服务副本也无法消费到消息，就会造成消息丢失问题。
+
+但广播模式需要注意的是消息的确认机制ACK。必须要在finally块中签收消息，避免集群服务重复消费。
+
+## 4. 消息重复发送问题
+
+诸如Nginx和各种Mq中间件，都会存在一个问题，就是路由/投递的消息如果太久没有被确认，就会造成路由/消息重发，碰巧遇到业务逻辑校验失效的情况，就会导致业务逻辑重复被执行。如果是支付业务，后果则不堪设想
+
+这往往是由于业务耗时过长导致的，但并不意味着业务执行失败
+
+rabbitmq的解决方案如下，适当提高消息尝试重发的最大时间间隔
+
+```yaml
+  #-----------------------------------------------------------------
+  ##                       RabbitMQ 通用配置                        --
+  #-----------------------------------------------------------------
+  rabbitmq:
+    # 消息发布确认模式：none-不确认（默认） correlated-消息发送到交换机后回调（异步确认） simple-同步确认，结合waitForConfirms使用
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        retry:
+          #60秒后重试
+          initial-interval: 60000
+          #启用发布重试
+          enabled: true
+          #传递消息的最大尝试次数
+          max-attempts: 3
+          #尝试的最大时间间隔
+          max-interval: 60000
+          #应用于先前传递重试时间间隔的乘数
+          multiplier: 1.0
 ```
