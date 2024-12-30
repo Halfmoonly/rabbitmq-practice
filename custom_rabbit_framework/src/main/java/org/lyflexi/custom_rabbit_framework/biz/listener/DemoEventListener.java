@@ -7,8 +7,10 @@ import org.lyflexi.custom_rabbit_framework.biz.event.DemoEvent;
 import org.lyflexi.custom_rabbit_framework.biz.handler.DemoMessageHandler;
 import org.lyflexi.custom_rabbit_framework.commonapi.constant.MQIConstant;
 import org.lyflexi.custom_rabbit_framework.commonapi.holder.SystemTaskerContextHolder;
+import org.lyflexi.custom_rabbit_framework.commonapi.listener.AbstractListener;
 import org.lyflexi.custom_rabbit_framework.commonapi.listener.IListener;
 import org.lyflexi.custom_rabbit_framework.biz.message.DemoMessageData;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class DemoEventListener implements IListener {
+public class DemoEventListener extends AbstractListener {
 
     @Autowired
     private DemoMessageHandler demoMessageHandler;
@@ -34,14 +36,23 @@ public class DemoEventListener implements IListener {
     /**
      * 监听RabbitMQ消息
      * @param message 消息对象
-     * @param deliveryTag MQ消息唯一标识
      * @param channel MQ通道
+     * @param event 时间对象
      */
     @RabbitListener(queues = MQIConstant.TASK_SUBMITTED_QUEUE, concurrency = "1")
-    public void onRabbitMQEvent(DemoMessageData message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
-        //由于消息是异步的，切记一定要设置系统上下文，后续BizContextHolder将填充为admin信息
-        SystemTaskerContextHolder.getInstance().mount();
-        demoMessageHandler.process(message);
+    public void onRabbitMQEvent(Message message, Channel channel, DemoEvent event) {
+        long deliveryTag = message.getMessageProperties().getDeliveryTag();
+        try {
+            log.info("DemoEventListener:{}",event);
+            //由于消息是异步的，切记一定要设置系统上下文，后续BizContextHolder将填充为admin信息
+            SystemTaskerContextHolder.getInstance().mount();
+            demoMessageHandler.process(event.getMessageData());
+            channel.basicAck(deliveryTag,false);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            super.basicReject(channel,deliveryTag);
+        }
     }
 
     /**

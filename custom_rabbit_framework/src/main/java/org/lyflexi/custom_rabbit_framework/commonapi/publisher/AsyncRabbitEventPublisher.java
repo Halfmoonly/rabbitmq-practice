@@ -38,7 +38,7 @@ import java.util.concurrent.DelayQueue;
 @Component("asyncRabbitEventPublisher")
 public class AsyncRabbitEventPublisher implements IEventPublisher, SmartInitializingSingleton {
 
-    private DelayQueue<DelayEntity<IMessageData>> delay = new DelayQueue<>();
+    private DelayQueue<DelayEntity<IEvent>> delay = new DelayQueue<>();
 
     private static final Long DEFAULT_DELAY_TIME = 5000L;
 
@@ -49,15 +49,20 @@ public class AsyncRabbitEventPublisher implements IEventPublisher, SmartInitiali
     private IMessageLogService msgLogService;
 
 
+    /**
+     * 直接发送Event对象
+     * @param event 事件对象
+     * @return
+     */
     @Override
     public boolean publish(IEvent event) {
         Assert.notNull(event.getEventType(), "发布事件事件类型不能为空！");
         Assert.notNull(event.getMessageData(), "发布事件消息体不能为空！");
         event.getMessageData().assertParams();
-        log.info("准备发布事件，eventType:{}, target:{}, seqNo:{}, messageId:{}", event.getEventType(), event.getTarget(), event.getMessageData().getSeqNo(), event.getMessageData().getMessageId());
+        log.info("准备发布事件，eventType:{}, seqNo:{}, messageId:{}", event.getEventType(), event.getMessageData().getSeqNo(), event.getMessageData().getMessageId());
         EventTypeEnums eventType = EventTypeEnums.getEventType(event.getEventType());
         Assert.notNull(eventType, "发布事件事件类型无效！");
-        delay.put(new DelayEntity<>(event.getMessageData(), eventType, DEFAULT_DELAY_TIME));
+        delay.put(new DelayEntity<>(event, eventType, DEFAULT_DELAY_TIME));
         log.info("事件已加入队列，稍后会自动发送，当前队列深度：{}", delay.size());
         return true;
     }
@@ -67,8 +72,9 @@ public class AsyncRabbitEventPublisher implements IEventPublisher, SmartInitiali
         ExecutorUtil.pool.execute(()-> {
             while (true) {
                 try {
-                    DelayEntity<IMessageData> delayEntity = delay.take();
-                    IMessageData message = delayEntity.getData();
+                    DelayEntity<IEvent> delayEntity = delay.take();
+                    IEvent event = delayEntity.getData();
+                    IMessageData message = event.getMessageData();
                     log.info("准备发送MQ消息，seqNo:{}, messageId:{}, version:{}, factoryCode:{}", message.getSeqNo(), message.getMessageId(), message.getVersion(), message.getFactoryCode());
                     EventTypeEnums eventType = delayEntity.getEventType();
                     if (StringUtils.isNotEmpty(message.getMessageId()) && msgLogService.getOne(message.getMessageId(), message.getVersion())!=null) {
@@ -89,7 +95,7 @@ public class AsyncRabbitEventPublisher implements IEventPublisher, SmartInitiali
                     msgLogService.save(msgLogPo);
                     CorrelationData correlationData = new CorrelationData(message.getSeqNo());
                     correlationData.setReturned(new ReturnedMessage(new Message(message.getFactoryCode().getBytes(StandardCharsets.UTF_8), new MessageProperties()), 0,"",eventType.getExchange(),eventType.getRoutingKey()));
-                    rabbitTemplate.convertAndSend(eventType.getExchange(), eventType.getRoutingKey(), message, process -> {
+                    rabbitTemplate.convertAndSend(eventType.getExchange(), eventType.getRoutingKey(), event, process -> {
                         process.getMessageProperties().getHeaders().put(MQIConstant.COUNTER_KEY, 0);
                         return process;
                     }, correlationData);
