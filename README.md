@@ -37,20 +37,41 @@ public class DemoMessageData extends BaseMessageData {
 ```
 - 封装事件对象，将消息对象封装于事件之中：如[DemoEvent.java](custom_rabbit_framework%2Fsrc%2Fmain%2Fjava%2Forg%2Flyflexi%2Fcustom_rabbit_framework%2Fbiz%2Fevent%2FDemoEvent.java)
 ```java
-public class DemoEvent extends AbstractEvent {
+@Getter
+@NoArgsConstructor
+public class DemoEvent extends AbstractEvent<DemoMessageData> {
+    /**
+     * 初始状态
+     */
+    private DeliverStatusEnum sourceStatus;
+
+    /**
+     * 目标状态
+     */
+    private DeliverStatusEnum targetStatus;
+
 
     public DemoEvent(String eventType) {
         super(eventType);
     }
 
-    public static DemoEvent of (IMessageData message) {
+    public static DemoEvent of (DemoMessageData message) {
         DemoEvent event = new DemoEvent(EventTypeEnums.DEMO_EVENT.getEvent());
         event.setMessageData(message);
         return event;
     }
 
+    public static DemoEvent of (DemoMessageData message ,DeliverStatusEnum sourceStatus,DeliverStatusEnum targetStatus) {
+        DemoEvent event = new DemoEvent(EventTypeEnums.DEMO_EVENT.getEvent());
+        event.setMessageData(message);
+        event.sourceStatus = sourceStatus;
+        event.targetStatus = targetStatus;
+        return event;
+    }
+
+
     public DemoMessageData getMessageData() {
-        return (DemoMessageData) super.getMessageData();
+        return super.getMessageData();
     }
 }
 ```
@@ -59,7 +80,6 @@ public class DemoEvent extends AbstractEvent {
 @Slf4j
 @Service
 public class DemoMessageHandler extends AbstractHandler<DemoMessageData> {
-
 
     @Override
     public String getHandlerName() {
@@ -72,12 +92,14 @@ public class DemoMessageHandler extends AbstractHandler<DemoMessageData> {
     }
 }
 
+
 ```
 - 如：[DemoEventListener.java](custom_rabbit_framework%2Fsrc%2Fmain%2Fjava%2Forg%2Flyflexi%2Fcustom_rabbit_framework%2Fbiz%2Flistener%2FDemoEventListener.java)，编写监听器，并注入消息处理器
 ```java
+
 @Slf4j
 @Component
-public class DemoEventListener implements IListener {
+public class DemoEventListener extends AbstractListener {
 
     @Autowired
     private DemoMessageHandler demoMessageHandler;
@@ -85,12 +107,23 @@ public class DemoEventListener implements IListener {
     /**
      * 监听RabbitMQ消息
      * @param message 消息对象
-     * @param deliveryTag MQ消息唯一标识
      * @param channel MQ通道
+     * @param event 时间对象
      */
     @RabbitListener(queues = MQIConstant.TASK_SUBMITTED_QUEUE, concurrency = "1")
-    public void onRabbitMQEvent(DemoMessageData message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) {
-        demoMessageHandler.process(message);
+    public void onRabbitMQEvent(Message message, Channel channel, DemoEvent event) {
+        long deliveryTag = message.getMessageProperties().getDeliveryTag();
+        try {
+            log.info("DemoEventListener:{}",event);
+            //由于消息是异步的，切记一定要设置系统上下文，后续BizContextHolder将填充为admin信息
+            SystemTaskerContextHolder.getInstance().mount();
+            demoMessageHandler.process(event.getMessageData());
+            channel.basicAck(deliveryTag,false);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            super.basicReject(channel,deliveryTag);
+        }
     }
 
     /**

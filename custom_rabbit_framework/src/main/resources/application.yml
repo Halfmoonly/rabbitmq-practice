@@ -3,7 +3,7 @@ spring:
     name: custom_rabbit_framework
   main:
     allow-bean-definition-overriding: true
-  # 本地
+# 本地
 #  rabbitmq:
 #    addresses: ${RABBIT1:192.168.18.100}:5672
 #    username: ${RABBIT_MQ_USERNAME:guest}
@@ -29,7 +29,7 @@ spring:
   rabbitmq:
     addresses: ${RABBIT1:10.28.20.10}:31401,${RABBIT2:10.28.20.18}:31401,${RABBIT3:10.28.20.24}:31401
     username: ${RABBIT_MQ_USERNAME:MY_USER}
-    password: ${RABBIT_MQ_PASSWORD:Changeme_123}
+    password: ${RABBIT_MQ_PASSWORD:}
     publisher-confirms: true
     publisher-confirm-type: correlated
     publisher-returns: true
