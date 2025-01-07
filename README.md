@@ -87,7 +87,7 @@ basicNack也是否定的交付，其功能和basicReject是一样的。区别是
 
 - 参数1：消费消息的index
 - 参数2：是否批量否定多个消息，设为false就与basicReject功能一样，true的前提也是在同一个channel，且在该消息否定前存在未确认的消息
--参数3： 对异常消息的处理，true表示重排序，false表示丢弃
+- 参数3： 对异常消息的处理，true表示重排序，false表示丢弃
 ```java
 public class Recv1 {
     public static void main(String[] args) throws IOException {
