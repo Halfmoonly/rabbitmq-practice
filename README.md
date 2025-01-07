@@ -1,5 +1,129 @@
 # rabbitmq-practice
-基础原理todo
+基础知识todo
+
+# 消费者确认模式ack
+
+消费者确认机制是基于数据安全的考虑。当rabbitmq将消息发送给消费者进行消费时，消费者可能会消费消息失败的情况，用户可以设置消费失败的消息给其他消费者消费或者直接丢弃。
+
+自动确认模式积极的一面是能够拥有更高的吞吐量，但是却存在数据安全的问题。默认开启自动确认后，队列中的数据在给消费者后就认为是成功的处理了数据，因此会立马将队列里面的数据进行删除。
+
+当消费者在消费消息时出现了异常，这些数据就会进行丢失。因此，一般情况下我们都需要手动确认去保证数据的安全性。
+
+1. basicAck
+
+basicAck方法是肯定的交付，一般在该消息处理完后执行，该消息才会在队列里面被删除，不然会处于UnAcked的状态存在队列中。
+
+其方法有两个参数：
+
+- 参数1：消费消息的index
+- 参数2: 是否批量确认消息,前提是在同一个channel里面，且是在该消息确认前没有被确认的消息才能批量确认。
+```java
+public class Recv1 {
+    public static void main(String[] args) throws IOException {
+        Connection connection = MqUtil.getConnection();
+        final Channel channel = connection.createChannel();
+        channel.queueDeclare("work",true,false,false,null);
+        // 设置通道的预取数量为1，官方推荐100到300，数据会影响其吞吐量
+        channel.basicQos(10);
+        // 关闭消息的自动确认机制
+        channel.basicConsume("work", false, new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                System.out.println(new String(body));
+                // 在处理完消息后手动进行确认
+                /*
+                * 参数1： 消费消息的index
+                * 参数2： 是否批量进行确认
+                * */
+                channel.basicAck(envelope.getDeliveryTag(), false);
+            }
+        });
+    }
+}
+```
+
+2. basicReject
+
+basicReject是否定的交付，一般在消费消息时出现异常等的时候执行。可以将该消息丢弃或重排序去重新处理消息
+
+其方法有两个参数：
+
+- 参数1: 消费消息的index
+- 参数2: 对异常消息的处理，true表示重排序，false表示丢弃
+```java
+public class Recv1 {
+    public static void main(String[] args) throws IOException {
+        Connection connection = MqUtil.getConnection();
+        final Channel channel = connection.createChannel();
+        channel.queueDeclare("work",true,false,false,null);
+        // 设置通道的预取数量为1，官方推荐100到300，数据会影响其吞吐量
+        channel.basicQos(10);
+        // 关闭消息的自动确认机制
+        channel.basicConsume("work", false, new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                try {
+                    System.out.println(new String(body) + "----" + envelope.getDeliveryTag());
+                    // 在处理完消息后手动进行确认
+                    /*
+                     * 参数1： 消息标签
+                     * 参数2： 是否批量进行确认
+                     * */
+                    channel.basicAck(envelope.getDeliveryTag(), true);
+                } catch (Exception e) {
+                    channel.basicReject(envelope.getDeliveryTag(), false);
+                }
+            }
+        });
+    }
+}
+```
+
+3.basicNack
+
+basicNack也是否定的交付，其功能和basicReject是一样的。区别是basicNack比basicReject的功能更强一些。他能够一次丢弃多个或重排序多个消息
+
+其方法有三个参数：
+
+- 参数1：消费消息的index
+- 参数2：是否批量否定多个消息，设为false就与basicReject功能一样，true的前提也是在同一个channel，且在该消息否定前存在未确认的消息
+-参数3： 对异常消息的处理，true表示重排序，false表示丢弃
+```java
+public class Recv1 {
+    public static void main(String[] args) throws IOException {
+        Connection connection = MqUtil.getConnection();
+        final Channel channel = connection.createChannel();
+        channel.queueDeclare("work",true,false,false,null);
+        // 设置通道的预取数量为1，官方推荐100到300，数据会影响其吞吐量
+        channel.basicQos(10);
+        // 关闭消息的自动确认机制
+        channel.basicConsume("work", false, new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                try {
+                    System.out.println(new String(body) + "----" + envelope.getDeliveryTag());
+                    // 在处理完消息后手动进行确认
+                    /*
+                     * 参数1： 消息标签
+                     * 参数2： 是否批量进行确认
+                     * */
+                    channel.basicAck(envelope.getDeliveryTag(), true);
+                } catch (Exception e) {
+                    channel.basicNack(envelope.getDeliveryTag(), false,true);
+                }
+            }
+        });
+    }
+}
+```
+
+# 通道的预取设置
+
+预取设置其含义是允许该通道未确认交付的最大数量。一旦达到该值，rabbitmq将不再往该消费者传递更多的消息。其好处是能够避免内存消耗过大，合理的设置预取值能够增加其吞吐量。官方推荐100到300之间可提供最佳的吞吐量。实际需要反复测试确定。代码参考上面，已经进行过设置
+
+`channel.basicQos(10);`
+
+
 
 # [custom-rabbit-framework-v1](custom-rabbit-framework-v1)
 
