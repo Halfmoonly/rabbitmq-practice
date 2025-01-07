@@ -19,8 +19,9 @@
         <module>boot_rabbit_common</module>
         <module>boot_rabbit_consumer</module>
         <module>boot_rabbit_producer</module>
-        <module>custom_rabbit_framework</module>
+        <module>custom-rabbit-framework-v1</module>
         <module>boot_rabbit_tx_producer</module>
+        <module>custom-rabbit-framework-v2</module>
     </modules>
     <properties>
         <java.version>17</java.version>
