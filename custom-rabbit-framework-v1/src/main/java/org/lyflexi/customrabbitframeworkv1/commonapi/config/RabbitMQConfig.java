@@ -1,8 +1,8 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.config;
+package org.lyflexi.customrabbitframeworkv1.commonapi.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.lyflexi.customrabbitframeworkv2.commonapi.constant.MQIConstant;
-import org.lyflexi.customrabbitframeworkv2.commonapi.utils.KeyUtil;
+import org.lyflexi.customrabbitframeworkv1.commonapi.constant.MQIConstant;
+import org.lyflexi.customrabbitframeworkv1.commonapi.utils.KeyUtil;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;

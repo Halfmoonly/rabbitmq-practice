@@ -1,7 +1,7 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.delay;
+package org.lyflexi.customrabbitframeworkv1.commonapi.delay;
 
 import lombok.Data;
-import org.lyflexi.customrabbitframeworkv2.commonapi.enums.EventTypeEnums;
+import org.lyflexi.customrabbitframeworkv1.commonapi.enums.EventTypeEnums;
 
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;

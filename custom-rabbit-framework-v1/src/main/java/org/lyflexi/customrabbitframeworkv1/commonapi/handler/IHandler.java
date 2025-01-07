@@ -1,6 +1,6 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.handler;
+package org.lyflexi.customrabbitframeworkv1.commonapi.handler;
 
-import org.lyflexi.customrabbitframeworkv2.commonapi.message.BaseMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.message.BaseMessageData;
 
 /**
  * @Description:

@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.enums;
+package org.lyflexi.customrabbitframeworkv1.commonapi.enums;
 
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.holder;
+package org.lyflexi.customrabbitframeworkv1.commonapi.holder;
 
 /**
  * @Description:

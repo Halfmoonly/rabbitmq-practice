@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2;
+package org.lyflexi.customrabbitframeworkv1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

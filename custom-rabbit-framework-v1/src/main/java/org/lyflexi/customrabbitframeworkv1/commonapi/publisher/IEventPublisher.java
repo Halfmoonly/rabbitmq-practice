@@ -1,6 +1,6 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.publisher;
+package org.lyflexi.customrabbitframeworkv1.commonapi.publisher;
 
-import org.lyflexi.customrabbitframeworkv2.commonapi.event.IEvent;
+import org.lyflexi.customrabbitframeworkv1.commonapi.event.IEvent;
 
 
 public interface IEventPublisher {

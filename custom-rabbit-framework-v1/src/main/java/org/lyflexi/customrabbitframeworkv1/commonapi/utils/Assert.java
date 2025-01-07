@@ -1,8 +1,8 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.utils;
+package org.lyflexi.customrabbitframeworkv1.commonapi.utils;
 
 import cn.hutool.core.collection.CollectionUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.lyflexi.customrabbitframeworkv2.commonapi.exception.LyFlexiBusinessException;
+import org.lyflexi.customrabbitframeworkv1.commonapi.exception.LyFlexiBusinessException;
 
 import java.util.Objects;
 

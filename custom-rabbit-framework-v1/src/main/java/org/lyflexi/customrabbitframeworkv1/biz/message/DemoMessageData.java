@@ -1,8 +1,8 @@
-package org.lyflexi.customrabbitframeworkv2.biz.message;
+package org.lyflexi.customrabbitframeworkv1.biz.message;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.lyflexi.customrabbitframeworkv2.commonapi.message.BaseMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.message.BaseMessageData;
 
 /**
  * @Description:

@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.po;
+package org.lyflexi.customrabbitframeworkv1.commonapi.po;
 
 import lombok.Builder;
 import lombok.Data;

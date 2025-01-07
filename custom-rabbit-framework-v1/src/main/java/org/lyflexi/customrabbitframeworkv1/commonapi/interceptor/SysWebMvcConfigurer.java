@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.interceptor;
+package org.lyflexi.customrabbitframeworkv1.commonapi.interceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

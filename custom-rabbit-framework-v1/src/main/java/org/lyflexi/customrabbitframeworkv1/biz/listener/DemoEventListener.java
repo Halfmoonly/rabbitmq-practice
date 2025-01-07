@@ -1,15 +1,15 @@
-package org.lyflexi.customrabbitframeworkv2.biz.listener;
+package org.lyflexi.customrabbitframeworkv1.biz.listener;
 
 import com.alibaba.fastjson.JSON;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
-import org.lyflexi.customrabbitframeworkv2.biz.event.DemoEvent;
-import org.lyflexi.customrabbitframeworkv2.biz.handler.DemoMessageHandler;
-import org.lyflexi.customrabbitframeworkv2.commonapi.constant.MQIConstant;
-import org.lyflexi.customrabbitframeworkv2.commonapi.holder.SystemTaskerContextHolder;
-import org.lyflexi.customrabbitframeworkv2.commonapi.listener.AbstractListener;
-import org.lyflexi.customrabbitframeworkv2.commonapi.listener.IListener;
-import org.lyflexi.customrabbitframeworkv2.biz.message.DemoMessageData;
+import org.lyflexi.customrabbitframeworkv1.biz.event.DemoEvent;
+import org.lyflexi.customrabbitframeworkv1.biz.handler.DemoMessageHandler;
+import org.lyflexi.customrabbitframeworkv1.commonapi.constant.MQIConstant;
+import org.lyflexi.customrabbitframeworkv1.commonapi.holder.SystemTaskerContextHolder;
+import org.lyflexi.customrabbitframeworkv1.commonapi.listener.AbstractListener;
+import org.lyflexi.customrabbitframeworkv1.commonapi.listener.IListener;
+import org.lyflexi.customrabbitframeworkv1.biz.message.DemoMessageData;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;

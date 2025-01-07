@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.exception;
+package org.lyflexi.customrabbitframeworkv1.commonapi.exception;
 
 /**
  * @Description:

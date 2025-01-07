@@ -1,12 +1,12 @@
-package org.lyflexi.customrabbitframeworkv2.biz.event;
+package org.lyflexi.customrabbitframeworkv1.biz.event;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.lyflexi.customrabbitframeworkv2.commonapi.enums.DeliverStatusEnum;
-import org.lyflexi.customrabbitframeworkv2.commonapi.enums.EventTypeEnums;
-import org.lyflexi.customrabbitframeworkv2.commonapi.event.AbstractEvent;
-import org.lyflexi.customrabbitframeworkv2.biz.message.DemoMessageData;
-import org.lyflexi.customrabbitframeworkv2.commonapi.message.IMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.enums.DeliverStatusEnum;
+import org.lyflexi.customrabbitframeworkv1.commonapi.enums.EventTypeEnums;
+import org.lyflexi.customrabbitframeworkv1.commonapi.event.AbstractEvent;
+import org.lyflexi.customrabbitframeworkv1.biz.message.DemoMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.message.IMessageData;
 
 /**
  * @Description:

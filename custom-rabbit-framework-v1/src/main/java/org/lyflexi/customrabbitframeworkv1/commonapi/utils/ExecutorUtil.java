@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.utils;
+package org.lyflexi.customrabbitframeworkv1.commonapi.utils;
 
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;

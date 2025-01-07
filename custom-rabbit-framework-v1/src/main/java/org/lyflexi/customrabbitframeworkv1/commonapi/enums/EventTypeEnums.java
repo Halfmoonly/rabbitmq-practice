@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.enums;
+package org.lyflexi.customrabbitframeworkv1.commonapi.enums;
 
 /**
  * @Author: lyflexi
@@ -13,7 +13,6 @@ import org.springframework.amqp.core.ExchangeTypes;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.lyflexi.customrabbitframeworkv2.commonapi.constant.MQIConstant.DEMO_EVENT_TOPIC_QUEUE;
 
 /**
  * 消息类型枚举

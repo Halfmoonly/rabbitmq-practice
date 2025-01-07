@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.constant;
+package org.lyflexi.customrabbitframeworkv1.commonapi.constant;
 
 import com.google.common.collect.Lists;
 

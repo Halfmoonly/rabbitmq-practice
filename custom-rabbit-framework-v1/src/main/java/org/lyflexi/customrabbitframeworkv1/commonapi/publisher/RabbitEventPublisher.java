@@ -1,11 +1,11 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.publisher;
+package org.lyflexi.customrabbitframeworkv1.commonapi.publisher;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.lyflexi.customrabbitframeworkv2.commonapi.constant.MQIConstant;
-import org.lyflexi.customrabbitframeworkv2.commonapi.enums.EventTypeEnums;
-import org.lyflexi.customrabbitframeworkv2.commonapi.event.IEvent;
-import org.lyflexi.customrabbitframeworkv2.commonapi.message.IMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.constant.MQIConstant;
+import org.lyflexi.customrabbitframeworkv1.commonapi.enums.EventTypeEnums;
+import org.lyflexi.customrabbitframeworkv1.commonapi.event.IEvent;
+import org.lyflexi.customrabbitframeworkv1.commonapi.message.IMessageData;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;

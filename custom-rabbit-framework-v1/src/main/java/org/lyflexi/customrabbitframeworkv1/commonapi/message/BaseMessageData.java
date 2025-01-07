@@ -1,9 +1,9 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.message;
+package org.lyflexi.customrabbitframeworkv1.commonapi.message;
 
 import cn.hutool.core.lang.UUID;
 //import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import lombok.Data;
-import org.lyflexi.customrabbitframeworkv2.commonapi.utils.Assert;
+import org.lyflexi.customrabbitframeworkv1.commonapi.utils.Assert;
 
 /**
  * @Description:

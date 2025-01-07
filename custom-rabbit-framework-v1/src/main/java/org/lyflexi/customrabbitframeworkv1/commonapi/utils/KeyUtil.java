@@ -1,6 +1,6 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.utils;
+package org.lyflexi.customrabbitframeworkv1.commonapi.utils;
 
-import org.lyflexi.customrabbitframeworkv2.commonapi.constant.MQIConstant;
+import org.lyflexi.customrabbitframeworkv1.commonapi.constant.MQIConstant;
 
 /**
  * @Description:

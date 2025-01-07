@@ -1,6 +1,6 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.event;
+package org.lyflexi.customrabbitframeworkv1.commonapi.event;
 
-import org.lyflexi.customrabbitframeworkv2.commonapi.message.IMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.message.IMessageData;
 
 /**
  * @Description:

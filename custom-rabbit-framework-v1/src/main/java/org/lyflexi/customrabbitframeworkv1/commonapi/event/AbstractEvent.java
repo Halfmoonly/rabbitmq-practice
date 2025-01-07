@@ -1,9 +1,9 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.event;
+package org.lyflexi.customrabbitframeworkv1.commonapi.event;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.lyflexi.customrabbitframeworkv2.commonapi.message.IMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.message.IMessageData;
 
 /**
  * @Description:

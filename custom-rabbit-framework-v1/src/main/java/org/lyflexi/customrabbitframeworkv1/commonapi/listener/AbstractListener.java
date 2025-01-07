@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.listener;
+package org.lyflexi.customrabbitframeworkv1.commonapi.listener;
 
 import com.rabbitmq.client.Channel;
 

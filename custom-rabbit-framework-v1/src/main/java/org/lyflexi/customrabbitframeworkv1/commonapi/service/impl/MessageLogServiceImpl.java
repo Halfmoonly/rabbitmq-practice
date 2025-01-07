@@ -1,8 +1,8 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.service.impl;
+package org.lyflexi.customrabbitframeworkv1.commonapi.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.lyflexi.customrabbitframeworkv2.commonapi.po.SysConsumerMsgLogPo;
-import org.lyflexi.customrabbitframeworkv2.commonapi.service.IMessageLogService;
+import org.lyflexi.customrabbitframeworkv1.commonapi.po.SysConsumerMsgLogPo;
+import org.lyflexi.customrabbitframeworkv1.commonapi.service.IMessageLogService;
 import org.springframework.stereotype.Service;
 
 /**

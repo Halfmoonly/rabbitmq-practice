@@ -1,19 +1,19 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.publisher;
+package org.lyflexi.customrabbitframeworkv1.commonapi.publisher;
 
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.lyflexi.customrabbitframeworkv2.commonapi.enums.DeliverStatusEnum;
-import org.lyflexi.customrabbitframeworkv2.commonapi.utils.Assert;
-import org.lyflexi.customrabbitframeworkv2.commonapi.utils.ExecutorUtil;
-import org.lyflexi.customrabbitframeworkv2.commonapi.constant.MQIConstant;
-import org.lyflexi.customrabbitframeworkv2.commonapi.delay.DelayEntity;
-import org.lyflexi.customrabbitframeworkv2.commonapi.enums.EventTypeEnums;
-import org.lyflexi.customrabbitframeworkv2.commonapi.event.IEvent;
-import org.lyflexi.customrabbitframeworkv2.commonapi.message.IMessageData;
-import org.lyflexi.customrabbitframeworkv2.commonapi.po.SysConsumerMsgLogPo;
-import org.lyflexi.customrabbitframeworkv2.commonapi.service.IMessageLogService;
+import org.lyflexi.customrabbitframeworkv1.commonapi.enums.DeliverStatusEnum;
+import org.lyflexi.customrabbitframeworkv1.commonapi.utils.Assert;
+import org.lyflexi.customrabbitframeworkv1.commonapi.utils.ExecutorUtil;
+import org.lyflexi.customrabbitframeworkv1.commonapi.constant.MQIConstant;
+import org.lyflexi.customrabbitframeworkv1.commonapi.delay.DelayEntity;
+import org.lyflexi.customrabbitframeworkv1.commonapi.enums.EventTypeEnums;
+import org.lyflexi.customrabbitframeworkv1.commonapi.event.IEvent;
+import org.lyflexi.customrabbitframeworkv1.commonapi.message.IMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.po.SysConsumerMsgLogPo;
+import org.lyflexi.customrabbitframeworkv1.commonapi.service.IMessageLogService;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;

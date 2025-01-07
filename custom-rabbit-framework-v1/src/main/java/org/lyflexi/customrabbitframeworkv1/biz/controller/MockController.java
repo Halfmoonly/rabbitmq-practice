@@ -1,10 +1,10 @@
-package org.lyflexi.customrabbitframeworkv2.biz.controller;
+package org.lyflexi.customrabbitframeworkv1.biz.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.lyflexi.customrabbitframeworkv2.biz.event.DemoEvent;
-import org.lyflexi.customrabbitframeworkv2.biz.message.DemoMessageData;
-import org.lyflexi.customrabbitframeworkv2.commonapi.publisher.IEventPublisher;
+import org.lyflexi.customrabbitframeworkv1.biz.event.DemoEvent;
+import org.lyflexi.customrabbitframeworkv1.biz.message.DemoMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.publisher.IEventPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;

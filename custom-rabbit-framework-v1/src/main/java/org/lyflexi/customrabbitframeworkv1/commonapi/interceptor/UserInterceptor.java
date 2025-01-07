@@ -1,9 +1,9 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.interceptor;
+package org.lyflexi.customrabbitframeworkv1.commonapi.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.lyflexi.customrabbitframeworkv2.commonapi.holder.LoginUserVo;
-import org.lyflexi.customrabbitframeworkv2.commonapi.holder.BizContextHolder;
+import org.lyflexi.customrabbitframeworkv1.commonapi.holder.LoginUserVo;
+import org.lyflexi.customrabbitframeworkv1.commonapi.holder.BizContextHolder;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 

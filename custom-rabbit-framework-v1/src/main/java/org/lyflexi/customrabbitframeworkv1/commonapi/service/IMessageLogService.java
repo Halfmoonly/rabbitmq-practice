@@ -1,6 +1,6 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.service;
+package org.lyflexi.customrabbitframeworkv1.commonapi.service;
 
-import org.lyflexi.customrabbitframeworkv2.commonapi.po.SysConsumerMsgLogPo;
+import org.lyflexi.customrabbitframeworkv1.commonapi.po.SysConsumerMsgLogPo;
 
 /**
  * @Description:

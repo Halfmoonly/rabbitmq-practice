@@ -1,4 +1,4 @@
-package org.lyflexi.customrabbitframeworkv2.commonapi.message;
+package org.lyflexi.customrabbitframeworkv1.commonapi.message;
 
 /**
  * @Description:

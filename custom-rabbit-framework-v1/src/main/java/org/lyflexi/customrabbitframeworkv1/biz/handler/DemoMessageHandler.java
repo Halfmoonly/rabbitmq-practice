@@ -1,9 +1,9 @@
-package org.lyflexi.customrabbitframeworkv2.biz.handler;
+package org.lyflexi.customrabbitframeworkv1.biz.handler;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import org.lyflexi.customrabbitframeworkv2.biz.message.DemoMessageData;
-import org.lyflexi.customrabbitframeworkv2.commonapi.handler.AbstractHandler;
+import org.lyflexi.customrabbitframeworkv1.biz.message.DemoMessageData;
+import org.lyflexi.customrabbitframeworkv1.commonapi.handler.AbstractHandler;
 import org.springframework.stereotype.Service;
 
 /**
