@@ -1,5 +1,5 @@
 # rabbitmq-practice
-# custom_rabbit_framework
+# [custom-rabbit-framework-v1](custom-rabbit-framework-v1)
 
 ## 1.如何使用该框架进行事件发布与消费
 
@@ -297,3 +297,7 @@ rabbitmq的解决方案如下，适当提高消息尝试重发的最大时间间
           #应用于先前传递重试时间间隔的乘数
           multiplier: 1.0
 ```
+
+# [custom-rabbit-framework-v2](custom-rabbit-framework-v2)
+
+增加广播模式
