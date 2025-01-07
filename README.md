@@ -262,7 +262,7 @@ public class AutoLoadQueuePostprocessor implements BeanFactoryPostProcessor {
 
 因此，无论处理成功或者异常，都请确保手动签收或者使用自动确认机制是重要的:
 - 在 try 块中: channel.basicAck(deliveryTag, false);
-- 在 finally 块中： channel.basicReject(deliveryTag, false);
+- 在 catch 块中： channel.basicReject(deliveryTag, false);
 
 以保证消息不会因为程序异常而丢失。
 

@@ -50,7 +50,6 @@ public class RabbitMQConfig {
      *
      *     这个问题解决办法就是重写一下这个东东，用代码设置手动确认。就OK了
      */
-    //TODO 还是未解决
     @Bean
     public RabbitListenerContainerFactory<?> rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();

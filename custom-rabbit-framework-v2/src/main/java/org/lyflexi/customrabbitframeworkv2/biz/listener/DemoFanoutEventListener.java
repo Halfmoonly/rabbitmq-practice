@@ -45,9 +45,10 @@ public class DemoFanoutEventListener extends AbstractListener {
             demoTopicMessageHandler.process(event.getMessageData());
             channel.basicAck(deliveryTag,false);
         } catch (Exception e) {
+            super.basicReject(channel,deliveryTag);
             throw new RuntimeException(e);
         } finally {
-            super.basicReject(channel,deliveryTag);
+            //清理上下文
         }
     }
     /**
@@ -66,9 +67,10 @@ public class DemoFanoutEventListener extends AbstractListener {
             demoTopicMessageHandler.process(event.getMessageData());
             channel.basicAck(deliveryTag,false);
         } catch (Exception e) {
+            super.basicReject(channel,deliveryTag);
             throw new RuntimeException(e);
         } finally {
-            super.basicReject(channel,deliveryTag);
+            //清理上下文
         }
     }
 }

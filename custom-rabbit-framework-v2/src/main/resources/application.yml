@@ -29,7 +29,7 @@ spring:
   rabbitmq:
     addresses: ${RABBIT1:10.28.20.10}:31401,${RABBIT2:10.28.20.18}:31401,${RABBIT3:10.28.20.24}:31401
     username: ${RABBIT_MQ_USERNAME:MY_USER}
-    password: ${RABBIT_MQ_PASSWORD:}
+    password: ${RABBIT_MQ_PASSWORD:Changeme_123}
     publisher-confirms: true
     publisher-confirm-type: correlated
     publisher-returns: true
