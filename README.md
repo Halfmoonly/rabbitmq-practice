@@ -1,4 +1,6 @@
 # rabbitmq-practice
+基础原理todo
+
 # [custom-rabbit-framework-v1](custom-rabbit-framework-v1)
 
 ## 1.如何使用该框架进行事件发布与消费
@@ -300,4 +302,17 @@ rabbitmq的解决方案如下，适当提高消息尝试重发的最大时间间
 
 # [custom-rabbit-framework-v2](custom-rabbit-framework-v2)
 
-增加广播模式
+增加广播模式。
+
+v1版本的topic模式通过枚举配置，以及spring工厂自动配置，大大提升了扩展性，灵活性
+
+但是v1版本的toptc模式顶多是向交换机发送多种key，然后由正则模糊路由匹配到同一个队列接收，想象一下这种属于多对1接收模式
+
+但是，在后期分布式业务拆分中，同生产者的消费者很有可能位于不同的微服务。
+
+因此v2版本要做的就是增加一种模式，即向交换机发送一种key，可以被多个队列接收，所谓广播模式fanout支持:
+
+- 绑定在同exchange上的所有队列无差别接收消息
+- 额外实现可配置化的单对多消息发送
+
+至此，多对一模式接收，一对多模式接收，共同组成了Rabbitmq的业务生态
