@@ -27,9 +27,9 @@ spring:
 #          multiplier: 1.0
 # 远程
   rabbitmq:
-    addresses: ${RABBIT1:10.28.20.10}:31401,${RABBIT2:10.28.20.18}:31401,${RABBIT3:10.28.20.24}:31401
-    username: ${RABBIT_MQ_USERNAME:MY_USER}
-    password: ${RABBIT_MQ_PASSWORD:}
+    addresses: ${RABBIT1:ip1}:port1,${RABBIT2:ip2}:port2,${RABBIT3:ip3}:port3
+    username: ${RABBIT_MQ_USERNAME:username}
+    password: ${RABBIT_MQ_PASSWORD:password}
     publisher-confirms: true
     publisher-confirm-type: correlated
     publisher-returns: true
